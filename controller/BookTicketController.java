@@ -18,6 +18,7 @@ public class BookTicketController {
 	public void ticketBooker(Passenger passenger) 
 	{
 		DataBase.getInstance().setPassengerList(passenger);
+		bookTicketView.alertMsg("Booked successfully...You can see your ticket details on check ticket tab...");
 	}
 
 	public Map<Flight, Integer> checkAvailableFlight(String from, String to) 
