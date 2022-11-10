@@ -5,7 +5,7 @@ public class Passenger
 	private int age;
 	private String gender;
 	private int id;
-	
+	private int ticketCount;
 	private String status;
 	public String getName() {
 		return name;
@@ -36,6 +36,12 @@ public class Passenger
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public int getTicketCount() {
+		return ticketCount;
+	}
+	public void setTicketCount(int ticketCount) {
+		this.ticketCount = ticketCount;
 	}
 	
 	
