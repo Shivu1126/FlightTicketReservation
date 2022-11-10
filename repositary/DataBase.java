@@ -30,8 +30,8 @@ public class DataBase
 	public List<Passenger> getPassengerList() {
 		return passengerList;
 	}
-	public void setPassengerList(List<Passenger> passengerList) {
-		this.passengerList = passengerList;
+	public void setPassengerList(Passenger passengerList) {
+		this.passengerList.add(passengerList);
 	}
 	
 }
