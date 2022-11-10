@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.Flight;
+import model.Passenger;
 import repositary.DataBase;
 import view.BookTicketView;
 
@@ -14,9 +15,9 @@ public class BookTicketController {
 		this.bookTicketView = bookTicketView;
 	}
 	
-	public void ticketBooker() 
+	public void ticketBooker(Passenger passenger) 
 	{
-		
+		DataBase.getInstance().setPassengerList(passenger);
 	}
 
 	public Map<Flight, Integer> checkAvailableFlight(String from, String to) 
@@ -74,5 +75,22 @@ public class BookTicketController {
 		}
 
 		return 0;
+	}
+
+	public boolean checkAvailableSeat(int noOfPassenger, int flightId) {
+		// TODO Auto-generated method stub
+		List<Flight> flight = DataBase.getInstance().getFlightList();
+		for(int i=0;i<flight.size();i++)
+		{
+			if(flightId==flight.get(i).getFlightId() && flight.get(i).getSeats()>=noOfPassenger)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int getNewPassengerId() {
+		return DataBase.getInstance().getPassengerList().size()+1;
 	}
 }
