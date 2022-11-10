@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import controller.BookTicketController;
 import model.Flight;
+import model.Passenger;
 
 public class BookTicketView 
 {
@@ -64,7 +65,28 @@ public class BookTicketView
 		String gender = scanner.next();
 		System.out.println("Enter age");
 		int age = scanner.nextInt();
+		int id = bookTicketContoller.getNewPassengerId();
+		String status;
+		if(bookTicketContoller.checkAvailableSeat(noOfPassenger,flightId))
+		{
+			status = "CNF";
+		}
+		else
+		{
+			status = "WL";
+		}
+		Passenger passenger = new Passenger();
+		passenger.setName(name);
+		passenger.setId(id);
+		passenger.setGender(gender);
+		passenger.setAge(age);
+		passenger.setTicketCount(noOfPassenger);
+		passenger.setStatus(status);
 		
-	//	if(checkAvailableSeat(noOfPassenger,))
+		bookTicketContoller.ticketBooker(passenger);
+	}
+
+	public void alertMsg(String alert) {
+		System.out.println(alert);
 	}
 }
