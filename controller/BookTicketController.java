@@ -18,7 +18,7 @@ public class BookTicketController {
 	public void ticketBooker(Passenger passenger) 
 	{
 		DataBase.getInstance().setPassengerList(passenger);
-		bookTicketView.alertMsg("Booked successfully...You can see your ticket details on check ticket tab...");
+		bookTicketView.alertMsg("Booked successfully...You can see your ticket details on ticket tab...");
 	}
 
 	public Map<Flight, Integer> checkAvailableFlight(String from, String to) 
@@ -33,33 +33,24 @@ public class BookTicketController {
 		{
 			Flight flight = flightList.get(i);
 			List<String> sourceAndDestination = flight.getRoutes();
-			int temp=0;
+	
 			int precentage = 0;
 			for(int j=0;j<sourceAndDestination.size();j++)
 			{
-				if(from.equals(sourceAndDestination.get(i)))
+				if(from.equals(sourceAndDestination.get(j)))
 				{
-					for(int k=j;k<sourceAndDestination.size();k++)
+					for(int k=j+1;k<sourceAndDestination.size();k++)
 					{
 						precentage++;
-						if(to.equals(sourceAndDestination.get(j)))
+						if(to.equals(sourceAndDestination.get(k)))
 						{
-							temp=1;
-							break;
+							precentage = precentage*10;	
+							int price = flight.getTicketFare();
+							int fare = price - (price * precentage/100);		
+							flightDet.put(flight, fare);
 						}
 					}
 				}
-				if(temp!=0)
-				{			
-					break;
-				}
-			}
-			if(temp!=0)
-			{
-				precentage = precentage*10;	
-				int price = flight.getTicketFare();
-				int fare = price - (price * precentage/100);		
-				flightDet.put(flight, fare);
 			}
 		}
 		return flightDet;
@@ -85,13 +76,14 @@ public class BookTicketController {
 		{
 			if(flightId==flight.get(i).getFlightId() && flight.get(i).getSeats()>=noOfPassenger)
 			{
+				flight.get(i).setSeats(flight.get(i).getSeats()-noOfPassenger);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public int getNewPassengerId() {
+	public int getNewPassengerPnr() {
 		return DataBase.getInstance().getPassengerList().size()+1;
 	}
 }
