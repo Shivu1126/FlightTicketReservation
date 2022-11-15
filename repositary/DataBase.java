@@ -13,6 +13,7 @@ public class DataBase
 	private List<Passenger> passengerList;
 	DataBase() {
 		flightList = new ArrayList<>();
+		passengerList = new ArrayList<>();
 	}
 	public static DataBase getInstance()
 	{
