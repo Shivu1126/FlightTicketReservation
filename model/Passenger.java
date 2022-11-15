@@ -4,9 +4,11 @@ public class Passenger
 	private String name;
 	private int age;
 	private String gender;
-	private int id;
+	private int pnr;
 	private int ticketCount;
 	private String status;
+	private int flightId;
+	private int ticketPrice;
 	public String getName() {
 		return name;
 	}
@@ -25,11 +27,11 @@ public class Passenger
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getId() {
-		return id;
+	public int getPNR() {
+		return pnr;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setPNR(int id) {
+		this.pnr = id;
 	}
 	public String getStatus() {
 		return status;
@@ -42,6 +44,18 @@ public class Passenger
 	}
 	public void setTicketCount(int ticketCount) {
 		this.ticketCount = ticketCount;
+	}
+	public int getFlightId() {
+		return flightId;
+	}
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+	public int getTicketPrice() {
+		return ticketPrice;
+	}
+	public void setTicketPrice(int ticketPrice) {
+		this.ticketPrice = ticketPrice;
 	}
 	
 	
