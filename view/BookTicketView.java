@@ -1,5 +1,6 @@
 package view;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class BookTicketView
 		String from = scanner.next();
 		System.out.println("Enter to location..");
 		String to = scanner.next();
+		HashMap<Integer,Integer> ticketFareCheck = new HashMap<>();
 		Map<Flight, Integer> availableFlight= bookTicketContoller.checkAvailableFlight(from,to);
 		if(availableFlight.isEmpty())
 		{
@@ -33,7 +35,7 @@ public class BookTicketView
 		System.out.println("--------------------");
 		for(Map.Entry<Flight, Integer> map: availableFlight.entrySet() )
 		{
-
+			ticketFareCheck.put(map.getKey().getFlightId(),map.getValue());
 			System.out.println("Flight no :" +map.getKey().getFlightId()+"|| name : "+map.getKey().getFlightName()+" || Source :"+map.getKey().getSource()+" || Destination:1"+map.getKey().getDestination()+"\r\n"
 					+ "|| Fare : "+ map.getValue() +" || seats :"+map.getKey().getSeats());
 			System.out.println("Routes : || ");
@@ -56,7 +58,7 @@ public class BookTicketView
 			else
 				System.out.println("Enter prober flight id");
 		}
-		
+		int fare = ticketFareCheck.get(flightId);
 		System.out.println("Enter number of passenger");
 		int noOfPassenger = scanner.nextInt();
 		System.out.println("Enter passenger name");
@@ -65,7 +67,7 @@ public class BookTicketView
 		String gender = scanner.next();
 		System.out.println("Enter age");
 		int age = scanner.nextInt();
-		int id = bookTicketContoller.getNewPassengerId();
+		int pnr = bookTicketContoller.getNewPassengerPnr();
 		String status;
 		if(bookTicketContoller.checkAvailableSeat(noOfPassenger,flightId))
 		{
@@ -77,12 +79,13 @@ public class BookTicketView
 		}
 		Passenger passenger = new Passenger();
 		passenger.setName(name);
-		passenger.setId(id);
+		passenger.setPNR(pnr);
 		passenger.setGender(gender);
 		passenger.setAge(age);
 		passenger.setTicketCount(noOfPassenger);
 		passenger.setStatus(status);
-		
+		passenger.setFlightId(flightId);
+		passenger.setTicketPrice(fare);
 		bookTicketContoller.ticketBooker(passenger);
 	}
 
